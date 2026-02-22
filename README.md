@@ -20,7 +20,7 @@ Using Twilio, we host real phone numbers that connect directly to our system. Wh
 
 | Resource | Link |
 |----------|------|
-| **YouTube Demo Video (1–2 min)** | [*Add your YouTube link here*](#) |
+
 | **Live Dashboard** | [Live Dashboard](https://honey-dashboard.onrender.com) |
 | **Telegram Bot** | [@ScamBaitAI_BOT](https://t.me/ScamBaitAI_BOT) |
 | **Public GitHub** | [github.com/diyaavirmani/SCAM-BAIT](https://github.com/diyaavirmani/SCAM-BAIT) |
