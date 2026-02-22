@@ -1,13 +1,12 @@
 # **ScamBait AI**
 
-
-ScamBait AI is an agentic honeypot system that engages scammers, extracts intelligence, and disrupts their operations by wasting their most valuable resource—time.
+ScamBait AI is an agentic honeypot system that engages scammers, extracts intelligence, and disrupts their operations by wasting their most valuable resource - time.
 
 We deployed ScamBait AI across two real-world channels to demonstrate its capabilities.
 
 First: Telegram.
 Telegram is widely used by scammers. We deployed a bot that behaves like a real human. Every message from the scammer is forwarded to our backend, where an LLM generates realistic replies.
-This architecture allows us to reuse the same detection and extraction logic across hundreds of simultaneous scam conversations—without rebuilding the system’s core intelligence.
+This architecture allows us to reuse the same detection and extraction logic across hundreds of simultaneous scam conversations - without rebuilding the system's core intelligence.
 
 Second: Phone-based scams.
 Using Twilio, we host real phone numbers that connect directly to our system. When a scammer calls, our model generates responses in real time, and ElevenLabs converts them into natural, confused human-like voices. To the scammer, it feels completely real.
@@ -20,29 +19,34 @@ Using Twilio, we host real phone numbers that connect directly to our system. Wh
 
 | Resource | Link |
 |----------|------|
-
-| **Live Dashboard** | [Live Dashboard](https://honey-dashboard.onrender.com) |
 | **Telegram Bot** | [@ScamBaitAI_BOT](https://t.me/ScamBaitAI_BOT) |
 | **Public GitHub** | [github.com/diyaavirmani/SCAM-BAIT](https://github.com/diyaavirmani/SCAM-BAIT) |
-
-  The Demo on you tube covers:
-
-- Starting a conversation with the Telegram bot (simulated scammer → AI victim).
-- Real-time updates on the dashboard (live feed, intelligence cards, stats).
-- Optional: voice call flow (Twilio → Deepgram STT → LLM → ElevenLabs TTS).
+| **API** | [honey-api-wr74.onrender.com](https://honey-api-wr74.onrender.com/) |
+| **Bot (Webhook)** | [honey-bot-9kce.onrender.com](https://honey-bot-9kce.onrender.com/) |
 
 
-## Images from PPT
 
-*Screenshots or slides from your presentation (architecture, dashboard, Telegram).*
+## Architecture Diagram
 
-| Slide / Section | Description |
-|-----------------|-------------|
-| *e.g. Architecture* | *System diagram: Bot → API → LLM + Detection + Extraction → Dashboard* |
-| *e.g. Dashboard* | *Screenshot of the real-time dashboard with Live Feed and Intelligence panel* |
-| *e.g. Telegram* | *Conversation example: scammer message → AI persona reply* |
+*High-level system architecture (ScamBait AI).*
 
-*(You can replace this table with actual images using `![Description](path/to/image.png)`.)*
+![ScamBait AI Architecture](images/architecture.png)
+
+---
+
+## How It Works
+
+*End-to-end flow: from scammer contact to intelligence extraction.*
+
+![How ScamBait AI Works](images/how-it-works.png)
+
+---
+
+## Working of the Telegram Bot
+
+*Screenshot showing the Telegram bot in action: scammer message and AI persona reply.*
+
+![Telegram Bot in Action](images/telegram-bot.png)
 
 ---
 
@@ -50,28 +54,20 @@ Using Twilio, we host real phone numbers that connect directly to our system. Wh
 
 *Overview of features: persona, detection, extraction, dashboard, voice.*
 
-1. **Multi-channel victim persona**  
-   The same "Meena" (confused elderly) persona responds via **Telegram bot** and (optionally) **Twilio voice**. Judges or testers send messages as a "scammer"; the system replies in character.
+1. **Multi-channel victim persona**
+   The same "Persona" (confused elderly) persona responds via **Telegram bot** and (optionally) **Twilio voice**. Judges or testers send messages as a "scammer"; the system replies in character.
 
-2. **Scam detection**  
-   **Rule-based + ML (TF-IDF + LinearSVC)** pipeline. Classifies into types: `DIGITAL_ARREST`, `UPI_SCAM`, `JOB_SCAM`, `SEXTORTION`, etc.
+2. **Scam detection**
+   **Rule-based + ML (TF-IDF + SVM)** pipeline. Classifies into types: `DIGITAL_ARREST`, `UPI_SCAM`, `JOB_SCAM`, `SEXTORTION`, etc.
 
-3. **Intelligence extraction**  
+3. **Intelligence extraction**
    Regex + normalization to pull out: **phone numbers**, **UPI IDs**, **emails**, **APK links**, **phishing links**, **crypto wallets**, **social handles**, **IFSC codes**, and suspicious keywords.
 
-4. **Real-time dashboard**  
-   **React + Vite** app with WebSocket connection to the backend. Shows:
-   - Stats (active scams, hours saved, scammers exposed)
-   - Live message feed
-   - Intelligence cards (pop when new data is extracted)
-   - Scam volume chart (Recharts)
-   - Tabs: Dashboard, Live Monitor, Alerts, System Status, Settings
-
-5. **Concurrency & reliability**  
+4. **Concurrency and reliability**
    **Session locking** and **semaphore** (e.g. 30 concurrent) so many simultaneous sessions don't mix or crash. Graceful fallbacks on timeout/errors.
 
-6. **Voice AI (optional)**  
-   **Twilio** → **Deepgram** (STT) → **LLM** → **ElevenLabs** (TTS) → back to call. Barge-in and silence handling.
+5. **Voice **
+   **Twilio** to **Deepgram** (STT) to **LLM** to **ElevenLabs** (TTS) to back to call. Barge-in and silence handling.
 
 ---
 
@@ -82,11 +78,11 @@ Using Twilio, we host real phone numbers that connect directly to our system. Wh
 | Layer | Technologies |
 |-------|--------------|
 | **Backend** | Python 3.11+, FastAPI, LangGraph, LangChain (Groq / Cerebras), scikit-learn |
-| **Database** | SQLAlchemy, PostgreSQL (Supabase) or SQLite |
+| **Database** | SQLite |
 | **Voice** | Twilio (Programmable Voice), Deepgram (STT), ElevenLabs (TTS) |
 | **Bot** | python-telegram-bot, aiohttp (webhook server) |
 | **Frontend** | React 18, TypeScript, Vite, TailwindCSS, Recharts, Framer Motion, Lucide React |
-| **Deploy** | Render (API, Bot, Dashboard), Supabase (PostgreSQL) |
+| **Deploy** | Render (API, Bot, Dashboard) |
 
 ---
 
@@ -156,29 +152,29 @@ scam_bait_bot_tts_web/
 
 ---
 
-## Pre-existing Tools & Assets Used
+## Pre-existing Tools and Assets Used
 
 *Disclosure of third-party APIs, libraries, and assets.*
 
 We disclose the following **third-party services, libraries, and assets**:
 
-- **APIs & services**
-  - **Groq** and/or **Cerebras** — LLM inference for persona and detection fallback.
-  - **OpenAI-compatible** (e.g. LangChain) — used only if configured.
-  - **Deepgram** — speech-to-text for voice calls.
-  - **ElevenLabs** — text-to-speech for voice responses.
-  - **Twilio** — telephony and media streams for voice.
-  - **Supabase** — hosted PostgreSQL (optional; can use SQLite).
-  - **Render** — hosting for API, bot, and frontend.
-  - **Telegram** — Bot API and (optionally) BotFather-created bot.
+- **APIs and services**
+  - **Groq** and/or **Cerebras** - LLM inference for persona and detection fallback.
+  - **OpenAI-compatible** (e.g. LangChain) - used only if configured.
+  - **Deepgram** - speech-to-text for voice calls.
+  - **ElevenLabs** - text-to-speech for voice responses.
+  - **Twilio** - telephony and media streams for voice.
+  - **Supabase** - hosted PostgreSQL (optional; can use SQLite).
+  - **Render** - hosting for API, bot, and frontend.
+  - **Telegram** - Bot API and (optionally) BotFather-created bot.
 
 - **Libraries**
-  - **FastAPI**, **Uvicorn** — backend.
-  - **LangChain**, **LangGraph** — orchestration and LLM calls.
-  - **scikit-learn** — TF-IDF + LinearSVC for scam detection.
-  - **python-telegram-bot**, **aiohttp** — Telegram bot and webhook server.
-  - **React**, **Vite**, **TypeScript**, **TailwindCSS**, **Recharts**, **Framer Motion**, **Lucide React** — frontend.
-  - **Pydantic**, **SQLAlchemy**, **psycopg2-binary** — data and DB.
+  - **FastAPI**, **Uvicorn** - backend.
+  - **LangChain**, **LangGraph** - orchestration and LLM calls.
+  - **scikit-learn** - TF-IDF + LinearSVC for scam detection.
+  - **python-telegram-bot**, **aiohttp** - Telegram bot and webhook server.
+  - **React**, **Vite**, **TypeScript**, **TailwindCSS**, **Recharts**, **Framer Motion**, **Lucide React** - frontend.
+  - **Pydantic**, **SQLAlchemy**, **psycopg2-binary** - data and DB.
 
 - **Assets**
   - No proprietary artwork or media was used; UI is custom CSS/Tailwind and Lucide icons.
@@ -192,38 +188,38 @@ We disclose the following **third-party services, libraries, and assets**:
 
 ---
 
-## Vibe Log — Prompts & Workflow
+## Vibe Log - Prompts and Workflow
 
 *How we designed prompts and the main workflow (persona, detection, extraction, graph, voice).*
 
-### Persona (Meena)
+### Persona 
 
 - **Goal:** Sound like a confused, elderly person who might fall for scams (so scammers keep talking) but never give real money or data.
-- **Prompt style:** System prompt defines "Meena" — forgetful, hard of hearing, needs things repeated, asks "who is this?" and "is this the bank?". Replies are short, slightly tangential, and in character. We avoid any tone that sounds like a bot or security researcher.
+- **Prompt style:** System prompt defines "Meena" - forgetful, hard of hearing, needs things repeated, asks "who is this?" and "is this the bank?". Replies are short, slightly tangential, and in character. We avoid any tone that sounds like a bot or security researcher.
 - **Iteration:** We tuned length and confusion level so the model doesn't refuse to engage or break character. Hallucination filter (in `app/agents/hallucination_filter.py`) blocks responses that leak "I'm an AI" or safety refusals.
 
 ### Detection
 
 - **Goal:** High recall on scammy messages without blocking normal SMS (OTP, delivery, etc.).
 - **Approach:**
-  - **Rules first:** Keyword sets and legit senders (e.g. "amazon", "flipkart", "order #"). If rule score ≥ threshold → SCAM.
-  - **ML second:** TF-IDF + LinearSVC on a small labeled set; used when rules are unsure.
+  - **Rules first:** Keyword sets and legit senders (e.g. "amazon", "flipkart", "order #"). If rule score >= threshold then SCAM.
+  - **ML second:** TF-IDF + SVM on a small labeled set; used when rules are unsure.
   - **Scam type:** Same keyword sets mapped to `DIGITAL_ARREST`, `UPI_SCAM`, `JOB_SCAM`, `SEXTORTION` for dashboard and analytics.
 - **Prompt (when using LLM fallback):** "Is this message a scam? Reply SCAM or NOT_SCAM and optionally type." We kept it minimal to avoid over-refusal.
 
 ### Extraction
 
-- **Goal:** Pull phones, UPI, emails, APK links, crypto, etc., even when obfuscated ("at" → "@", "dot" → ".", spaced digits).
+- **Goal:** Pull phones, UPI, emails, APK links, crypto, etc., even when obfuscated ("at" to "@", "dot" to ".", spaced digits).
 - **Workflow:** Normalize text (in `app/agents/extraction.py`) then run regex for each type. Merge results from raw + normalized. No LLM for extraction in the main path.
 
 ### Graph (LangGraph)
 
-- **Flow:** `load_session` → `detection` (every turn) → `extraction` (on full history) → `persona` (LLM in character) → `validate_persona_output` → `timeline` (confidence/summary) → persist and optional callback.
+- **Flow:** `load_session` to `detection` (every turn) to `extraction` (on full history) to `persona` (LLM in character) to `validate_persona_output` to `timeline` (confidence/summary) to persist and optional callback.
 - **Decisions:** "Completed" when confidence is high and we decide to end the conversation (e.g. "Have a great day" or equivalent). Otherwise we stay in "engaging" and keep responding.
 
 ### Voice
 
-- **Goal:** Same persona over the phone. Twilio streams audio → Deepgram → text → same LLM persona → ElevenLabs TTS → stream back.
+- **Goal:** Same persona over the phone. Twilio streams audio to Deepgram to text to same LLM persona to ElevenLabs TTS to stream back.
 - **Prompts:** Reuse the same Meena system prompt; no separate voice-specific prompt. We added silence handling ("Hello? Are you there?") and barge-in (stop TTS when user speaks).
 
 ### What we'd do next
@@ -236,10 +232,10 @@ We disclose the following **third-party services, libraries, and assets**:
 
 ## License
 
-*MIT License. See [LICENSE](LICENSE).* Copyright (c) 2026 team kaizen.
+*MIT License. See [LICENSE](LICENSE).* Copyright (c) 2026 team ARCANE.
 
 ---
 
 ## Thanks
 
-*Built for the hackathon.* FastAPI, LangGraph, React, and the APIs listed above. Replace the YouTube link at the top with your demo video URL before submission.
+
