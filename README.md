@@ -38,7 +38,7 @@ Using Twilio, we host real phone numbers that connect directly to our system. Wh
 
 *End-to-end flow: from scammer contact to intelligence extraction.*
 
-![How ScamBait AI Works](images/4.png)
+![How ScamBait AI Works](images/new.jpg)
 
 ---
 
