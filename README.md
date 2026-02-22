@@ -30,7 +30,7 @@ Using Twilio, we host real phone numbers that connect directly to our system. Wh
 
 *High-level system architecture (ScamBait AI).*
 
-![ScamBait AI Architecture](images/architecture.png)
+![ScamBait AI Architecture](images/ScamBaitAI.pdf.jpg)
 
 ---
 
@@ -38,7 +38,7 @@ Using Twilio, we host real phone numbers that connect directly to our system. Wh
 
 *End-to-end flow: from scammer contact to intelligence extraction.*
 
-![How ScamBait AI Works](images/how-it-works.png)
+![How ScamBait AI Works](images/4.png)
 
 ---
 
@@ -46,7 +46,7 @@ Using Twilio, we host real phone numbers that connect directly to our system. Wh
 
 *Screenshot showing the Telegram bot in action: scammer message and AI persona reply.*
 
-![Telegram Bot in Action](images/telegram-bot.png)
+![Telegram Bot in Action](images/ss.png)
 
 ---
 
@@ -78,7 +78,7 @@ Using Twilio, we host real phone numbers that connect directly to our system. Wh
 | Layer | Technologies |
 |-------|--------------|
 | **Backend** | Python 3.11+, FastAPI, LangGraph, LangChain (Groq / Cerebras), scikit-learn |
-| **Database** | SQLite |
+| **Database** | SQLite,SQLAlchemy |
 | **Voice** | Twilio (Programmable Voice), Deepgram (STT), ElevenLabs (TTS) |
 | **Bot** | python-telegram-bot, aiohttp (webhook server) |
 | **Frontend** | React 18, TypeScript, Vite, TailwindCSS, Recharts, Framer Motion, Lucide React |
@@ -121,7 +121,7 @@ scam_bait_bot_tts_web/
 
 1. **Clone and install**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/diyaavirmani/SCAM-BAIT
    cd scam_bait_bot_tts_web
    pip install -r requirements.txt
    pip install -r bot/requirements.txt
@@ -144,13 +144,7 @@ scam_bait_bot_tts_web/
    ```
    Without `RENDER_EXTERNAL_URL` / `PRODUCTION_BOT_URL` it runs in **polling** mode.
 
-5. **Start dashboard**
-   ```bash
-   cd dashboard && npm install && npm run dev
-   ```
-   Set `VITE_API_URL` to your API URL if needed (e.g. `http://localhost:8000`).
 
----
 
 ## Pre-existing Tools and Assets Used
 
@@ -164,7 +158,7 @@ We disclose the following **third-party services, libraries, and assets**:
   - **Deepgram** - speech-to-text for voice calls.
   - **ElevenLabs** - text-to-speech for voice responses.
   - **Twilio** - telephony and media streams for voice.
-  - **Supabase** - hosted PostgreSQL (optional; can use SQLite).
+
   - **Render** - hosting for API, bot, and frontend.
   - **Telegram** - Bot API and (optionally) BotFather-created bot.
 
@@ -183,10 +177,6 @@ We disclose the following **third-party services, libraries, and assets**:
 - **Code / design**
   - Project and PRDs were developed internally; no pre-existing "scam honeypot" codebase was copied.
   - Architecture and prompts were designed for this hackathon/project.
-
-*If you add more services or assets later, list them here.*
-
----
 
 ## Vibe Log - Prompts and Workflow
 
