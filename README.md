@@ -19,11 +19,11 @@ Using Twilio, we host real phone numbers that connect directly to our system. Wh
 
 | Resource | Link |
 |----------|------|
-| **Telegram Bot** | [https://web.telegram.org/k/#@honeytrap_ai_bot) |
+| **Telegram Bot** | https://web.telegram.org/k/#@honeytrap_ai_bot |
 | **Public GitHub** | [github.com/diyaavirmani/SCAM-BAIT](https://github.com/diyaavirmani/SCAM-BAI) |
 | **API** | [honey-api-wr74.onrender.com](https://honey-api-wr74.onrender.com/) |
 | **Bot (Webhook)** | [honey-bot-9kce.onrender.com](https://honey-bot-9kce.onrender.com/) |
-|** Dashboard** | https://dashboard-cgo4.onrender/ |
+| ** Dashboard** | https://dashboard-cgo4.onrender/ |
 
 
 
